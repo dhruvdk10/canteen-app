@@ -1,0 +1,479 @@
+{
+  "banners": [
+    {
+      "img": "./canteen-banner1.avif",
+      "alt": "Delicious Snacks",
+      "position": "center",
+      "update": "Fresh & Tasty Snacks Available"
+    },
+    {
+      "img": "./canteen-banner2.avif",
+      "alt": "Special Offers",
+      "position": "center",
+      "update": "Grab Special Offers Today!"
+    },
+    {
+      "img": "./canteen-banner3.avif",
+      "alt": "Healthy Meals",
+      "position": "center",
+      "update": "Comfort Food for Every Mood"
+    }
+  ],
+  "snacks": [
+    {
+      "id": 1,
+      "image": "./samosa.avif",
+      "rating": 4.8,
+      "name": "Samosa",
+      "price": 20
+    },
+    {
+      "id": 2,
+      "image": "./burger.avif",
+      "rating": 4.5,
+      "name": "Burger",
+      "price": 50
+    },
+    {
+      "id": 3,
+      "image": "./pizza.avif",
+      "rating": 4.7,
+      "name": "Pizza",
+      "price": 100
+    },
+    {
+      "id": 4,
+      "image": "./pasta.avif",
+      "rating": 4.6,
+      "name": "Pasta",
+      "price": 80
+    },
+    {
+      "id": 5,
+      "image": "./sandwich.avif",
+      "rating": 4.4,
+      "name": "Sandwich",
+      "price": 40
+    },
+    {
+      "id": 6,
+      "image": "./fries.avif",
+      "rating": 4.3,
+      "name": "Fries",
+      "price": 30
+    },
+    {
+      "id": 7,
+      "image": "./noodles.avif",
+      "rating": 4.2,
+      "name": "Noodles",
+      "price": 60
+    },
+    {
+      "id": 8,
+      "image": "./momos.avif",
+      "rating": 4.1,
+      "name": "Momos",
+      "price": 70
+    },
+    {
+      "id": 9,
+      "image": "./thali.avif",
+      "rating": 4.0,
+      "name": "North Indian Thali",
+      "price": 25
+    }
+  ],
+  "students": [
+    {
+      "id": 1,
+      "name": "Dhruv Kapoor",
+      "email": "dhruv@gmail.com",
+      "phone": "1234567890",
+      "referralCode": "DH001",
+      "totalSpent": 120,
+      "orders": [
+        {
+          "id": 1,
+          "snackName": "Samosa",
+          "quantity": 2,
+          "amount": 40
+        },
+        {
+          "id": 2,
+          "snackName": "Pizza",
+          "quantity": 1,
+          "amount": 100
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Rahul Sharma",
+      "email": "rahul@gmail.com",
+      "phone": "0987654321",
+      "referralCode": "RH002",
+      "totalSpent": 90,
+      "orders": [
+        {
+          "id": 3,
+          "snackName": "Burger",
+          "quantity": 1,
+          "amount": 50
+        },
+        {
+          "id": 4,
+          "snackName": "Fries",
+          "quantity": 2,
+          "amount": 40
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Sneha Verma",
+      "email": "sneha@gmail.com",
+      "phone": "1122334455",
+      "referralCode": "SN003",
+      "totalSpent": 150,
+      "orders": [
+        {
+          "id": 5,
+          "snackName": "Pasta",
+          "quantity": 1,
+          "amount": 80
+        },
+        {
+          "id": 6,
+          "snackName": "Momos",
+          "quantity": 1,
+          "amount": 70
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Anjali Mehta",
+      "email": "anjali@gmail.com",
+      "phone": "5566778899",
+      "referralCode": "AJ004",
+      "totalSpent": 70,
+      "orders": [
+        {
+          "id": 7,
+          "snackName": "Sandwich",
+          "quantity": 1,
+          "amount": 40
+        },
+        {
+          "id": 8,
+          "snackName": "Fries",
+          "quantity": 1,
+          "amount": 30
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Vikram Singh",
+      "email": "vikram@gmail.com",
+      "phone": "9988776655",
+      "referralCode": "VK005",
+      "totalSpent": 60,
+      "orders": [
+        {
+          "id": 9,
+          "snackName": "Noodles",
+          "quantity": 1,
+          "amount": 60
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Priya Gupta",
+      "email": "priya@gmail.com",
+      "phone": "8877665544",
+      "referralCode": "PR006",
+      "totalSpent": 25,
+      "orders": [
+        {
+          "id": 10,
+          "snackName": "North Indian Thali",
+          "quantity": 1,
+          "amount": 25
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Amit Kumar",
+      "email": "amit@gmail.com",
+      "phone": "7766554433",
+      "referralCode": "AM007",
+      "totalSpent": 110,
+      "orders": [
+        {
+          "id": 11,
+          "snackName": "Pizza",
+          "quantity": 1,
+          "amount": 100
+        },
+        {
+          "id": 12,
+          "snackName": "Samosa",
+          "quantity": 1,
+          "amount": 20
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Neha Sharma",
+      "email": "neha@gmail.com",
+      "phone": "6655443322",
+      "referralCode": "NH008",
+      "totalSpent": 80,
+      "orders": [
+        {
+          "id": 13,
+          "snackName": "Pasta",
+          "quantity": 1,
+          "amount": 80
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Rohit Verma",
+      "email": "rohit@gmail.com",
+      "phone": "5544332211",
+      "referralCode": "RH009",
+      "totalSpent": 50,
+      "orders": [
+        {
+          "id": 14,
+          "snackName": "Burger",
+          "quantity": 1,
+          "amount": 50
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Sanya Kapoor",
+      "email": "sanya@gmail.com",
+      "phone": "4433221100",
+      "referralCode": "SY010",
+      "totalSpent": 30,
+      "orders": [
+        {
+          "id": 15,
+          "snackName": "Fries",
+          "quantity": 1,
+          "amount": 30
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Karan Singh",
+      "email": "karan@gmail.com",
+      "phone": "3322110099",
+      "referralCode": "KR011",
+      "totalSpent": 90,
+      "orders": [
+        {
+          "id": 16,
+          "snackName": "Momos",
+          "quantity": 1,
+          "amount": 70
+        },
+        {
+          "id": 17,
+          "snackName": "Sandwich",
+          "quantity": 1,
+          "amount": 40
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Ananya Malik",
+      "email": "ananya@gmail.com",
+      "phone": "2211009988",
+      "referralCode": "AN012",
+      "totalSpent": 60,
+      "orders": [
+        {
+          "id": 18,
+          "snackName": "Noodles",
+          "quantity": 1,
+          "amount": 60
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Siddharth Sharma",
+      "email": "siddharth@gmail.com",
+      "phone": "1100998877",
+      "referralCode": "SD013",
+      "totalSpent": 25,
+      "orders": [
+        {
+          "id": 19,
+          "snackName": "North Indian Thali",
+          "quantity": 1,
+          "amount": 25
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Meera Joshi",
+      "email": "meera@gmail.com",
+      "phone": "1122334455",
+      "referralCode": "MR014",
+      "totalSpent": 110,
+      "orders": [
+        {
+          "id": 20,
+          "snackName": "Pizza",
+          "quantity": 1,
+          "amount": 100
+        },
+        {
+          "id": 21,
+          "snackName": "Samosa",
+          "quantity": 1,
+          "amount": 20
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Aditya Chatterjee",
+      "email": "aditya@gmail.com",
+      "phone": "1133445566",
+      "referralCode": "AD015",
+      "totalSpent": 80,
+      "orders": [
+        {
+          "id": 22,
+          "snackName": "Pasta",
+          "quantity": 1,
+          "amount": 80
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Riya Jindal",
+      "email": "riya@gmail.com",
+      "phone": "1144556677",
+      "referralCode": "RY016",
+      "totalSpent": 50,
+      "orders": [
+        {
+          "id": 23,
+          "snackName": "Burger",
+          "quantity": 1,
+          "amount": 50
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Kabir Sahni",
+      "email": "kabir@gmail.com",
+      "phone": "1155667788",
+      "referralCode": "KB017",
+      "totalSpent": 30,
+      "orders": [
+        {
+          "id": 24,
+          "snackName": "Fries",
+          "quantity": 1,
+          "amount": 30
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Anika Saksena",
+      "email": "anika@gmail.com",
+      "phone": "1166778899",
+      "referralCode": "AN018",
+      "totalSpent": 90,
+      "orders": [
+        {
+          "id": 25,
+          "snackName": "Momos",
+          "quantity": 1,
+          "amount": 70
+        },
+        {
+          "id": 26,
+          "snackName": "Sandwich",
+          "quantity": 1,
+          "amount": 40
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Devansh Aggarwal",
+      "email": "devansh@gmail.com",
+      "phone": "1177889900",
+      "referralCode": "DV019",
+      "totalSpent": 60,
+      "orders": [
+        {
+          "id": 27,
+          "snackName": "Noodles",
+          "quantity": 1,
+          "amount": 60
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Isha Lalwani",
+      "email": "isha@gmail.com",
+      "phone": "1188990011",
+      "referralCode": "IS020",
+      "totalSpent": 25,
+      "orders": [
+        {
+          "id": 28,
+          "snackName": "North Indian Thali",
+          "quantity": 1,
+          "amount": 25
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "name": "Arjun Desai",
+      "email": "arjun@gmail.com",
+      "phone": "1199001122",
+      "referralCode": "AR021",
+      "totalSpent": 110,
+      "orders": [
+        {
+          "id": 29,
+          "snackName": "Pizza",
+          "quantity": 1,
+          "amount": 100
+        },
+        {
+          "id": 30,
+          "snackName": "Samosa",
+          "quantity": 1,
+          "amount": 20
+        }
+      ]
+    }
+  ]
+}
