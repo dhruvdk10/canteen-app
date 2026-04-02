@@ -8,10 +8,12 @@ import Navbar from "./components/Navbar";
 import Cart from "./pages/Cart";
 import { Routes, Route } from "react-router-dom";
 import api from "./services/Api";
+import SplashScreen from "./components/SplashScreen";
 
 function App() {
   const [cart, setCart] = useState([]);
   const [students, setStudents] = useState([]);
+  const [showSplash, setShowSplash] = useState(true); 
 
   useEffect(() => {
     fetchStudents();
@@ -47,13 +49,20 @@ function App() {
       await api.put(`/students/${studentId}`, updatedStudent);
 
       setStudents(prev =>
-        prev.map(s => s.id === Number(studentId) ? updatedStudent : s)
+        prev.map(s => (s.id === Number(studentId) ? updatedStudent : s))
       );
-
     } catch (err) {
       console.error("Order failed:", err);
     }
   };
+
+  if (showSplash) {
+    return (
+      <SplashScreen
+        onFinish={() => setShowSplash(false)}
+      />
+    );
+  }
 
   return (
     <>
