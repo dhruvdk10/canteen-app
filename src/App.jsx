@@ -17,12 +17,11 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    // Show splash screen only on first navigation to '/'
     if (location.pathname === "/" && !showSplash) {
       setShowSplash(true);
     }
     fetchStudents();
-  }, []); // run once on mount
+  }, []);
 
   const fetchStudents = async () => {
     try {
@@ -57,7 +56,6 @@ function App() {
     }
   };
 
-  // If splash is active, show it
   if (showSplash) {
     return <SplashScreen onFinish={() => setShowSplash(false)} />;
   }
