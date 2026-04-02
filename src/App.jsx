@@ -6,7 +6,7 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import Cart from "./pages/Cart";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import api from "./services/Api";
 
 function App() {
@@ -31,7 +31,6 @@ function App() {
 
     try {
       const student = students.find(s => s.id === Number(studentId));
-
       const newOrder = {
         id: Date.now(),
         snackName: snack.name,
@@ -57,19 +56,15 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
+    <>
       <Navbar />
       <SignUp />
       <Login />
 
       <Routes>
-        <Route
-          path="/"
-          element={<Home cart={cart} setCart={setCart} />}
-        />
+        <Route path="/" element={<Home cart={cart} setCart={setCart} />} />
         <Route path="/students" element={<Students />} />
         <Route path="/students/:id" element={<StudentDetail />} />
-
         <Route
           path="/cart"
           element={
@@ -82,7 +77,7 @@ function App() {
           }
         />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
 
