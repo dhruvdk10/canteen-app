@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 import Students from "./pages/Students";
 import StudentDetail from "./pages/StudentDetail";
 import Cart from "./pages/Cart";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import api from "./services/Api";
 import SplashScreen from "./components/SplashScreen";
 
@@ -14,15 +14,15 @@ function App() {
   const [cart, setCart] = useState([]);
   const [students, setStudents] = useState([]);
   const [showSplash, setShowSplash] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
-    const splashShown = localStorage.getItem("splashShown");
-    if (!splashShown) {
+    // Show splash screen only on first navigation to '/'
+    if (location.pathname === "/" && !showSplash) {
       setShowSplash(true);
-      localStorage.setItem("splashShown", "true");
     }
     fetchStudents();
-  }, []);
+  }, []); // run once on mount
 
   const fetchStudents = async () => {
     try {
@@ -50,18 +50,19 @@ function App() {
       };
       await api.put(`/students/${studentId}`, updatedStudent);
       setStudents((prev) =>
-        prev.map((s) =>
-          s.id === Number(studentId) ? updatedStudent : s
-        )
+        prev.map((s) => (s.id === Number(studentId) ? updatedStudent : s))
       );
     } catch (err) {
       console.error("Order failed:", err);
     }
   };
 
-  return showSplash ? (
-    <SplashScreen onFinish={() => setShowSplash(false)} />
-  ) : (
+  // If splash is active, show it
+  if (showSplash) {
+    return <SplashScreen onFinish={() => setShowSplash(false)} />;
+  }
+
+  return (
     <>
       <Navbar />
       <SignUp />
