@@ -17,7 +17,7 @@ function Navbar() {
 
       {/* Logo */}
       <Link className="navbar-brand d-flex align-items-center" to="/">
-        <img src="/edzy-logo.svg" alt="Edzy Logo" style={{ height: "40px" }} />
+        <img src="/canteen-app/edzy-logo.svg" alt="Edzy Logo" style={{ height: "40px" }} />
 
         <div className="ms-2 d-flex align-items-center">
           <span className="food-badge d-flex align-items-center justify-content-center me-1">
