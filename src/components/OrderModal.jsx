@@ -6,7 +6,7 @@ function OrderModal({ show, onClose, snack, students }) {
   const modalRef = useRef(null);
   const bsModalRef = useRef(null);
 
-  const { addToCart, placeOrder } = useStore(); // ✅ Zustand
+  const { addToCart, placeOrder } = useStore();
 
   const [studentId, setStudentId] = useState("");
   const [quantity, setQuantity] = useState(1);
@@ -26,20 +26,29 @@ function OrderModal({ show, onClose, snack, students }) {
     else bsModalRef.current?.hide();
   }, [show, onClose]);
 
-  // ADD TO CART
   const handleAddToCart = () => {
+    if (!studentId) {
+      alert("Please select a student before adding to cart!");
+      return;
+    }
     if (!snack) return;
 
-    addToCart({ snack, quantity });
+    const studentName = students.find(s => s.id === Number(studentId))?.name;
 
-    alert(`${quantity} ${snack.name}(s) added to cart! ✅`);
+    addToCart({
+      snack,
+      quantity,
+      studentId: Number(studentId),
+      studentName, // ✅ add student name here
+    });
+
+    alert(`${quantity} ${snack.name}(s) added for ${studentName}! ✅`);
     bsModalRef.current?.hide();
   };
 
-  // PLACE ORDER
   const handlePlaceOrder = () => {
     if (!studentId) {
-      alert("Please select a student");
+      alert("Please select a student before placing the order!");
       return;
     }
 
@@ -61,17 +70,15 @@ function OrderModal({ show, onClose, snack, students }) {
           <div className="text-center mb-3">
             <img src={snack.image} alt={snack.name} className="card-img-top" />
             <div
-                    className="snack-type-square position-absolute"
-                    style={{ top: "20px", left: "20px", zIndex: 2 }}
-                  >
-                    <span
-                      className={`snack-type-dot ${
-                        snack.type === "veg"
-                          ? "veg-dot"
-                          : "non-veg-dot"
-                      }`}
-                    ></span>
-                  </div>
+              className="snack-type-square position-absolute"
+              style={{ top: "20px", left: "20px", zIndex: 2 }}
+            >
+              <span
+                className={`snack-type-dot ${
+                  snack.type === "veg" ? "veg-dot" : "non-veg-dot"
+                }`}
+              ></span>
+            </div>
           </div>
 
           <h5 className="mx-3">{snack.name}</h5>
@@ -91,11 +98,17 @@ function OrderModal({ show, onClose, snack, students }) {
             </select>
 
             <div className="d-flex align-items-center gap-1">
-              <button className="quantity-btn minus-btn" onClick={() => setQuantity((q) => Math.max(q - 1, 1))}>
+              <button
+                className="quantity-btn minus-btn"
+                onClick={() => setQuantity((q) => Math.max(q - 1, 1))}
+              >
                 -
               </button>
               <span>{quantity}</span>
-              <button className="quantity-btn plus-btn" onClick={() => setQuantity((q) => q + 1)}>
+              <button
+                className="quantity-btn plus-btn"
+                onClick={() => setQuantity((q) => q + 1)}
+              >
                 +
               </button>
             </div>

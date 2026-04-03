@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useStore from "../store/useStore";
 
@@ -14,36 +14,35 @@ function Cart() {
     placeOrder,
   } = useStore();
 
-  const [selectedStudent, setSelectedStudent] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("COD");
   const [location, setLocation] = useState("");
 
-  useEffect(() => {
-    if (students.length > 0 && !selectedStudent) {
-      setSelectedStudent(students[0].id);
-    }
-  }, [students, selectedStudent]);
-
   const getTotal = () => {
-    return cart.reduce((total, item) => total + item.snack.price * item.quantity, 0);
+    return cart.reduce(
+      (total, item) => total + item.snack.price * item.quantity,
+      0
+    );
   };
 
   const handlePlaceOrderClick = () => {
-    if (!selectedStudent || !location) {
-      alert("Please fill all details");
+    if (!location) {
+      alert("Please enter delivery location");
       return;
     }
 
-    const studentObj = students.find((s) => s.id === Number(selectedStudent));
-
-    if (!studentObj) {
-      alert("Invalid student selected");
+    const missingStudent = cart.some(item => !item.studentId);
+    if (missingStudent) {
+      alert("Some items do not have a selected student. Please check your cart.");
       return;
     }
 
     const orderData = {
-      items: cart,
-      student: studentObj.name,
+      items: cart.map(item => ({
+        snack: item.snack,
+        quantity: item.quantity,
+        studentId: item.studentId,
+        studentName: item.studentName || "Unknown", // 
+      })),
       paymentMethod,
       location,
       total: getTotal(),
@@ -53,12 +52,12 @@ function Cart() {
     const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
     localStorage.setItem("orders", JSON.stringify([...existingOrders, orderData]));
 
-    // Update student's orders in Zustand
+    // Place orders via Zustand
     cart.forEach((item) => {
       placeOrder({
-        studentId: Number(selectedStudent),
         snack: item.snack,
         quantity: item.quantity,
+        studentId: item.studentId,
       });
     });
 
@@ -82,7 +81,7 @@ function Cart() {
             {cart.map((item) => (
               <div key={item.snack.id} className="card mb-3 shadow-sm">
                 <div className="card-body">
-                  <div className="d-flex align-items-center justify-content-between">
+                  <div className="d-flex align-items-center justify-content-between position-relative">
                     {/* Image */}
                     <div style={{ width: "60px", height: "60px" }}>
                       <img
@@ -93,9 +92,12 @@ function Cart() {
                       />
                     </div>
 
-                    {/* Name */}
+                    {/* Name + Student */}
                     <div className="flex-grow-1 ms-3">
                       <h6 className="mb-0">{item.snack.name}</h6>
+                      <small className="text-muted">
+                        For: {item.studentName || students.find(s => s.id === item.studentId)?.name || "Unknown"}
+                      </small>
                     </div>
 
                     {/* Veg/Non-Veg Dot */}
@@ -147,22 +149,8 @@ function Cart() {
 
           {/* Sidebar */}
           <div className="col-lg-4">
-            <div className="card p-3 shadow-sm sticky-top">
+            <div className="card p-3 shadow-sm">
               <h4>Total: ₹{getTotal()}</h4>
-
-              <select
-                key={students.length}
-                className="form-control mb-3"
-                value={selectedStudent}
-                onChange={(e) => setSelectedStudent(e.target.value)}
-              >
-                {students.length === 0 && <option value="">Select Student</option>}
-                {students.map((s) => (
-                  <option key={s.id} value={s.id}>
-                    {s.name}
-                  </option>
-                ))}
-              </select>
 
               <input
                 type="text"
@@ -182,7 +170,10 @@ function Cart() {
                 <option value="Card">Card</option>
               </select>
 
-              <button className="btn btn-success w-100" onClick={handlePlaceOrderClick}>
+              <button
+                className="btn btn-success w-100"
+                onClick={handlePlaceOrderClick}
+              >
                 Place Order
               </button>
             </div>

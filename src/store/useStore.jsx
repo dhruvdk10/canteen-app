@@ -39,6 +39,7 @@ const useStore = create(
                   ? {
                       ...item,
                       quantity: item.quantity + newItem.quantity,
+                      studentName: newItem.studentName || item.studentName, // ✅ Add studentName
                     }
                   : item
               ),
@@ -46,7 +47,7 @@ const useStore = create(
           }
 
           return {
-            cart: [...state.cart, newItem],
+            cart: [...state.cart, { ...newItem, studentName: newItem.studentName }],
           };
         }),
 

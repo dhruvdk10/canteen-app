@@ -13,28 +13,6 @@ body {
   min-height: 100%;
 }
 
-.btn:focus,
-.btn:active:focus,
-.btn.show:focus {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-.form-control:focus,
-.form-check-input:focus {
-  outline: none !important;
-  box-shadow: none !important;
-  border-color: inherit !important;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-  outline: none !important;
-  box-shadow: none !important;
-  border-color: inherit !important;
-}
-
 #root {
   display: flex;
   flex-direction: column;
@@ -417,6 +395,8 @@ h2::after {
   background: transparent !important;
   box-shadow: none !important;
   font-size: 0.95rem;
+  overflow: visible !important;
+  display: inline-block;
 }
 
 .form-control::placeholder {
