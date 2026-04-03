@@ -17,9 +17,12 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === "/" && !showSplash) {
+
+    if (location.pathname === "/" && !localStorage.getItem("splashShown")) {
       setShowSplash(true);
+      localStorage.setItem("splashShown", "true");
     }
+
     fetchStudents();
   }, []);
 
