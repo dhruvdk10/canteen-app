@@ -13,7 +13,7 @@ function Navbar() {
   const { isLoggedIn, user, logout } = useStore();
 
   return (
-    <nav className="navbar fixed-top px-3 d-flex justify-content-between">
+    <nav className="navbar fixed-top px-4 d-flex justify-content-between">
 
       {/* Logo */}
       <Link className="navbar-brand d-flex align-items-center" to="/">
