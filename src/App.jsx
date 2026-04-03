@@ -17,14 +17,13 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-
     if (location.pathname === "/" && !localStorage.getItem("splashShown")) {
       setShowSplash(true);
       localStorage.setItem("splashShown", "true");
     }
 
     fetchStudents();
-  }, []);
+  }, [location]);
 
   const fetchStudents = async () => {
     try {
