@@ -39,7 +39,7 @@ function Cart() {
       alert("Invalid student selected");
       return;
     }
-    
+
     const orderData = {
       items: cart,
       student: studentObj.name,
@@ -123,6 +123,19 @@ function Cart() {
                         {item.snack.name}
                       </h6>
                     </div>
+
+                    <div
+                    className="snack-type-square position-absolute"
+                    style={{ top: "10px", left: "10px", zIndex: 2 }}
+                  >
+                    <span
+                      className={`snack-type-dot ${
+                        item.snack.type === "veg"
+                          ? "veg-dot"
+                          : "non-veg-dot"
+                      }`}
+                    ></span>
+                  </div>
 
                     {/* Price */}
                     <div style={{ width: "80px" }}>

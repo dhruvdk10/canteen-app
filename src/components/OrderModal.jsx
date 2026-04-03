@@ -60,6 +60,18 @@ function OrderModal({ show, onClose, snack, students }) {
 
           <div className="text-center mb-3">
             <img src={snack.image} alt={snack.name} className="card-img-top" />
+            <div
+                    className="snack-type-square position-absolute"
+                    style={{ top: "20px", left: "20px", zIndex: 2 }}
+                  >
+                    <span
+                      className={`snack-type-dot ${
+                        snack.type === "veg"
+                          ? "veg-dot"
+                          : "non-veg-dot"
+                      }`}
+                    ></span>
+                  </div>
           </div>
 
           <h5 className="mx-3">{snack.name}</h5>
