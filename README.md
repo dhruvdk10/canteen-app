@@ -14,6 +14,37 @@ A modern React-based web application for managing a school/college canteen, allo
 - **State Management**: React `useState` and `useEffect` hooks.
 - **API Integration**: Interacts with backend API using Axios.
 
+## Setup Instructions
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/dhruvdk10/canteen-app
+```
+
+2. **Navigate to the project directory**
+
+```bash
+cd canteen-app
+```
+
+3. **Install dependencies**
+
+```bash
+npm install
+```
+
+4. **Run the development server**
+
+```bash
+npm run dev
+```
+
+5. **Start the mock API server**
+
+```bash
+npx json-server --watch db.json --port 5000
+```
+
 ## Tech Stack
 
 - React 19
