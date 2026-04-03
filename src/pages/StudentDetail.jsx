@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../services/Api";
-import OrderModal from "../components/OrderModal";
 import Footer from "../components/Footer";
 
 function StudentDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [student, setStudent] = useState(null);
-  const [showOrderModal, setShowOrderModal] = useState(false);
 
   const fetchStudent = () => {
     api.get(`/students/${id}`)
@@ -55,10 +53,10 @@ function StudentDetail() {
 
             <div className="col-md-4 text-md-end mt-3 mt-md-0">
               <button
-                className="btn btn-success"
-                onClick={() => setShowOrderModal(true)}
+                className="btn btn-primary"
+                onClick={() => navigate("/")}
               >
-                + Place Order
+                Continue Ordering
               </button>
             </div>
           </div>
@@ -93,17 +91,6 @@ function StudentDetail() {
             </div>
           )}
         </div>
-
-        {/* MODAL */}
-        {showOrderModal && (
-          <OrderModal
-            show={showOrderModal}
-            snack={{}}
-            students={[student]}
-            onClose={() => setShowOrderModal(false)}
-            refresh={fetchStudent}
-          />
-        )}
       </div>
       <Footer />
     </>
