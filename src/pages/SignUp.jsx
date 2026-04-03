@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import data from "../data/Data"; // ✅ import local data
+import { students as initialStudents } from "../data/Data";
 import { FaFacebookF, FaGoogle, FaTwitter } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope, faPhone, faShieldHalved } from "@fortawesome/free-solid-svg-icons";
@@ -16,10 +16,9 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  // ✅ Use local data instead of API
-  const students = data.students;
 
-  // Referral Generator
+  const [students, setStudents] = useState(initialStudents);
+
   const generateReferralCode = () => {
     const initials = name.trim().slice(0, 2).toUpperCase();
     const nextNumber = students.length + 1;
@@ -48,7 +47,10 @@ const SignUp = () => {
     try {
       setLoading(true);
 
-      // ✅ Store in Zustand (instead of API)
+      // Update local state
+      setStudents((prev) => [...prev, newStudent]);
+
+      // Update Zustand store
       addStudent(newStudent);
       login(newStudent);
 
@@ -59,7 +61,7 @@ const SignUp = () => {
       const modal = window.bootstrap.Modal.getInstance(modalEl);
       if (modal) modal.hide();
 
-      // reset
+      // Reset form
       setName("");
       setEmail("");
       setPhone("");
@@ -82,13 +84,16 @@ const SignUp = () => {
           >
             <div className="modal-content">
 
+              {/* Header */}
               <div className="modal-header border-0 d-block text-center position-relative">
                 <h2 className="modal-title fw-bold mt-4">Sign Up</h2>
               </div>
 
+              {/* Body */}
               <div className="modal-body px-4">
                 <form onSubmit={handleSubmit}>
 
+                  {/* Name */}
                   <div className="input-group mb-3">
                     <span className="input-group-text bg-white border-0">
                       <FontAwesomeIcon icon={faUser} />
@@ -102,6 +107,7 @@ const SignUp = () => {
                     />
                   </div>
 
+                  {/* Email */}
                   <div className="input-group mb-3">
                     <span className="input-group-text bg-white border-0">
                       <FontAwesomeIcon icon={faEnvelope} />
@@ -115,6 +121,7 @@ const SignUp = () => {
                     />
                   </div>
 
+                  {/* Phone */}
                   <div className="input-group mb-3">
                     <span className="input-group-text bg-white border-0">
                       <FontAwesomeIcon icon={faPhone} />
@@ -128,6 +135,7 @@ const SignUp = () => {
                     />
                   </div>
 
+                  {/* Class */}
                   <div className="input-group mb-4">
                     <span className="input-group-text bg-white border-0">
                       <FontAwesomeIcon icon={faShieldHalved} />
@@ -141,13 +149,48 @@ const SignUp = () => {
                     />
                   </div>
 
+                  {/* Button */}
                   <button className="btn btn-secondary w-100 fw-bold" disabled={loading}>
                     {loading ? "Signing Up..." : "Sign Up"}
                   </button>
 
+                  {/* Message */}
                   {message && (
                     <p className="text-center mt-2 text-success">{message}</p>
                   )}
+
+                  {/* Divider */}
+                  <div className="text-center my-3">
+                    <span className="text-muted">OR Sign up with</span>
+                  </div>
+
+                  {/* Social Buttons */}
+                  <div className="d-flex justify-content-center gap-4">
+                    <button className="btn btn-outline-primary rounded-circle pb-2">
+                      <FaFacebookF />
+                    </button>
+                    <button className="btn btn-outline-danger rounded-circle pb-2">
+                      <FaGoogle />
+                    </button>
+                    <button className="btn btn-outline-info rounded-circle pb-2">
+                      <FaTwitter />
+                    </button>
+                  </div>
+
+                  {/* Switch to Login */}
+                  <div className="text-center mt-3">
+                    <span className="text-muted">
+                      Already have an account?{" "}
+                      <button
+                        className="btn btn-link p-0"
+                        data-bs-toggle="modal"
+                        data-bs-target="#loginModal"
+                        data-bs-dismiss="modal"
+                      >
+                        Login now
+                      </button>
+                    </span>
+                  </div>
 
                 </form>
               </div>
