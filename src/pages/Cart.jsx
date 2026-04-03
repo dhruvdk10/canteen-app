@@ -138,14 +138,14 @@ function Cart() {
                   </div>
 
                     {/* Price */}
-                    <div style={{ width: "80px" }}>
+                    <div style={{ width: "40px" }} className="ms-2">
                       ₹{item.snack.price * item.quantity}
                     </div>
 
                     {/* Quantity */}
                     <div className="d-flex gap-2">
                       <button
-                        className="btn btn-sm btn-outline-danger"
+                        className="btn btn-sm btn-outline-danger btn-sm"
                         onClick={() =>
                           updateQty(item.snack.id, "dec")
                         }
@@ -156,7 +156,7 @@ function Cart() {
                       <span>{item.quantity}</span>
 
                       <button
-                        className="btn btn-sm btn-outline-success"
+                        className="btn btn-sm btn-outline-success btn-sm"
                         onClick={() =>
                           updateQty(item.snack.id, "inc")
                         }
@@ -167,7 +167,7 @@ function Cart() {
 
                     {/* Remove */}
                     <button
-                      className="btn btn-sm btn-danger ms-2"
+                      className="btn btn-sm btn-danger ms-3"
                       onClick={() =>
                         removeItem(item.snack.id)
                       }

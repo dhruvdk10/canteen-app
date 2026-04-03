@@ -91,9 +91,13 @@ function OrderModal({ show, onClose, snack, students }) {
             </select>
 
             <div className="d-flex align-items-center gap-2">
-              <button onClick={() => setQuantity((q) => Math.max(q - 1, 1))}>-</button>
+              <button className="btn btn-outline-danger btn-sm" onClick={() => setQuantity((q) => Math.max(q - 1, 1))}>
+                -
+              </button>
               <span>{quantity}</span>
-              <button onClick={() => setQuantity((q) => q + 1)}>+</button>
+              <button className="btn btn-outline-success btn-sm" onClick={() => setQuantity((q) => q + 1)}>
+                +
+              </button>
             </div>
           </div>
 
