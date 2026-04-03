@@ -7,12 +7,12 @@ function Cart() {
 
   const {
     cart,
-    students,
+    students = [], 
     updateQuantity,
     removeFromCart,
     clearCart,
     placeOrder,
-  } = useStore(); 
+  } = useStore();
 
   const [selectedStudent, setSelectedStudent] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("COD");
@@ -40,7 +40,6 @@ function Cart() {
     });
 
     clearCart();
-
     alert(`Order placed via ${paymentMethod} 🚀`);
     navigate("/");
   };
@@ -60,11 +59,17 @@ function Cart() {
               <h6>{item.snack.name}</h6>
               <p>₹{item.snack.price * item.quantity}</p>
 
-              <button onClick={() => updateQuantity(item.snack.id, "dec")}>-</button>
+              <button onClick={() => updateQuantity(item.snack.id, "dec")}>
+                -
+              </button>
               {item.quantity}
-              <button onClick={() => updateQuantity(item.snack.id, "inc")}>+</button>
+              <button onClick={() => updateQuantity(item.snack.id, "inc")}>
+                +
+              </button>
 
-              <button onClick={() => removeFromCart(item.snack.id)}>Remove</button>
+              <button onClick={() => removeFromCart(item.snack.id)}>
+                Remove
+              </button>
             </div>
           ))}
 
@@ -72,7 +77,7 @@ function Cart() {
 
           <select onChange={(e) => setSelectedStudent(e.target.value)}>
             <option value="">Select Student</option>
-            {students.map((s) => (
+            {students?.map((s) => (
               <option key={s.id} value={s.id}>
                 {s.name}
               </option>
@@ -85,9 +90,7 @@ function Cart() {
             onChange={(e) => setLocation(e.target.value)}
           />
 
-          <button onClick={handlePlaceOrderClick}>
-            Place Order
-          </button>
+          <button onClick={handlePlaceOrderClick}>Place Order</button>
         </>
       )}
     </div>

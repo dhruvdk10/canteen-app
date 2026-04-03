@@ -4,7 +4,6 @@ import { persist } from "zustand/middleware";
 const useStore = create(
   persist(
     (set, get) => ({
-
       user: null,
       isLoggedIn: false,
 
@@ -53,9 +52,7 @@ const useStore = create(
 
       removeFromCart: (id) =>
         set((state) => ({
-          cart: state.cart.filter(
-            (item) => item.snack.id !== id
-          ),
+          cart: state.cart.filter((item) => item.snack.id !== id),
         })),
 
       updateQuantity: (id, type) =>
@@ -63,16 +60,10 @@ const useStore = create(
           cart: state.cart.map((item) => {
             if (item.snack.id === id) {
               if (type === "inc") {
-                return {
-                  ...item,
-                  quantity: item.quantity + 1,
-                };
+                return { ...item, quantity: item.quantity + 1 };
               }
               if (type === "dec" && item.quantity > 1) {
-                return {
-                  ...item,
-                  quantity: item.quantity - 1,
-                };
+                return { ...item, quantity: item.quantity - 1 };
               }
             }
             return item;
@@ -81,39 +72,36 @@ const useStore = create(
 
       clearCart: () => set({ cart: [] }),
 
-      // ORDERS STATE
       orders: [],
+      students: [],
 
-placeOrder: ({ studentId, snack, quantity }) =>
-  set((state) => {
-    const updatedStudents = state.students.map((student) => {
-      if (student.id === studentId) {
-        const newOrder = {
-          id: Date.now(),
-          snackName: snack.name,
-          quantity,
-          amount: snack.price * quantity,
-        };
+      placeOrder: ({ studentId, snack, quantity }) =>
+        set((state) => {
+          const updatedStudents = (state.students || []).map((student) => {
+            if (student.id === studentId) {
+              const newOrder = {
+                id: Date.now(),
+                snackName: snack.name,
+                quantity,
+                amount: snack.price * quantity,
+              };
 
-        return {
-          ...student,
-          totalSpent: student.totalSpent + newOrder.amount,
-          orders: [...student.orders, newOrder],
-        };
-      }
-      return student;
-    });
+              return {
+                ...student,
+                totalSpent: (student.totalSpent || 0) + newOrder.amount,
+                orders: [...(student.orders || []), newOrder],
+              };
+            }
+            return student;
+          });
 
-    return {
-      students: updatedStudents,
-      cart: [],
-    };
-  }),
-
+          return {
+            students: updatedStudents,
+            cart: [],
+          };
+        }),
     }),
-    {
-      name: "snack-store",
-    }
+    { name: "snack-store" }
   )
 );
 
