@@ -102,7 +102,7 @@ function OrderModal({ show, onClose, snack, students, setCart }) {
             <img src={snack.image} alt={snack.name} className="card-img-top" />
             <div
               className="snack-type-square position-absolute"
-              style={{ top: "10px", left: "10px", zIndex: 2 }}
+              style={{ top: "20px", left: "20px", zIndex: 2 }}
             >
               <span
                 className={`snack-type-dot ${snack.type === "veg" ? "veg-dot" : "non-veg-dot"

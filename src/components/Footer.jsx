@@ -37,17 +37,23 @@ function Footer() {
 
           {/* Social Links */}
           <div className="d-flex gap-3 fs-4">
-            <a href="https://facebook.com" target="_blank" rel="noreferrer" >
+            <a href="https://www.facebook.com/GetEdzy" target="_blank" rel="noreferrer" >
               <i className="bi bi-facebook text-primary"></i>
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noreferrer">
+            <a href="https://x.com/GetEdzy" target="_blank" rel="noreferrer">
               <i className="bi bi-twitter text-info"></i>
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noreferrer">
+            <a href="https://www.instagram.com/getedzy/" target="_blank" rel="noreferrer">
               <i className="bi bi-instagram text-danger"></i>
             </a>
-            <a href="https://whatsapp.com" target="_blank" rel="noreferrer">
+            <a href="https://www.linkedin.com/company/get-edzy/" target="_blank" rel="noreferrer">
+              <i className="bi bi-linkedin text-primary"></i>
+            </a>
+            <a href="https://api.whatsapp.com/send/?phone=919625668472&text&type=phone_number&app_absent=0" target="_blank" rel="noreferrer">
               <i className="bi bi-whatsapp text-success"></i>
+            </a>
+            <a href="https://www.youtube.com/@GetEdzy" target="_blank" rel="noreferrer">
+              <i className="bi bi-youtube text-danger"></i>
             </a>
           </div>
 
