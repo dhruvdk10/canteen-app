@@ -100,7 +100,7 @@ body::before {
 }
 
 .splash-badge svg {
-  font-size: 30px;
+  font-size: 20px !important;
 }
 
 h2 {
@@ -139,6 +139,10 @@ h2::after {
   background: linear-gradient(45deg, #ff9a3c, #ff6b3c);
   border-radius: 50%;
   color: white;
+}
+
+.food-badge svg{
+  font-size: 15px;
 }
 
 /* Hero Section */
