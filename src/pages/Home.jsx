@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUtensils, faList } from "@fortawesome/free-solid-svg-icons";
-import api from "../services/Api";
+import { snacks as snackData, students as studentData } from "../data/Data";
 import OrderModal from "../components/OrderModal";
 import HeroSection from "../components/HeroSection";
 import Footer from "../components/Footer";
@@ -11,15 +11,9 @@ function Home({ cart, setCart }) {
   const [snacks, setSnacks] = useState([]);
   const [selectedSnack, setSelectedSnack] = useState(null);
 
-  // Fetch snacks and students from API
   useEffect(() => {
-    api.get("/snacks")
-      .then((res) => setSnacks(res.data))
-      .catch((err) => console.error("Error fetching snacks:", err));
-
-    api.get("/students")
-      .then((res) => setStudents(res.data))
-      .catch((err) => console.error("Error fetching students:", err));
+    setSnacks(snackData);
+    setStudents(studentData);
   }, []);
 
   const openModal = (snack) => setSelectedSnack(snack);
@@ -34,8 +28,9 @@ function Home({ cart, setCart }) {
     const amount = snack.price * quantity;
 
     try {
-      const studentRes = await api.get(`/students/${studentId}`);
-      const student = studentRes.data;
+      const student = students.find(
+        (s) => s.id === Number(studentId)
+      );
 
       const newOrder = {
         id: Date.now(),
@@ -50,10 +45,10 @@ function Home({ cart, setCart }) {
         orders: [...student.orders, newOrder],
       };
 
-      await api.put(`/students/${studentId}`, updatedStudent);
-
       setStudents((prev) =>
-        prev.map((s) => (s.id === Number(studentId) ? updatedStudent : s))
+        prev.map((s) =>
+          s.id === Number(studentId) ? updatedStudent : s
+        )
       );
 
       alert("Order placed successfully!");
@@ -71,7 +66,6 @@ function Home({ cart, setCart }) {
       </div>
 
       <div className="container mt-4">
-
         <div className="row">
           {snacks.map((snack) => (
             <div className="col-md-4" key={snack.id}>
@@ -83,7 +77,9 @@ function Home({ cart, setCart }) {
                     alt={snack.name}
                   />
 
-                  <div className="rating-badge">⭐ {snack.rating}</div>
+                  <div className="rating-badge">
+                    ⭐ {snack.rating}
+                  </div>
 
                   <div className="hover-btn">
                     <button
@@ -103,12 +99,20 @@ function Home({ cart, setCart }) {
 
                 <div className="card-body">
                   <h5>{snack.name}</h5>
-                  <div className="snack-type-square position-absolute" style={{ top: '10px', left: '10px', zIndex: 2 }}>
+
+                  <div
+                    className="snack-type-square position-absolute"
+                    style={{ top: "10px", left: "10px", zIndex: 2 }}
+                  >
                     <span
-                      className={`snack-type-dot ${snack.type === "veg" ? "veg-dot" : "non-veg-dot"
-                        }`}
+                      className={`snack-type-dot ${
+                        snack.type === "veg"
+                          ? "veg-dot"
+                          : "non-veg-dot"
+                      }`}
                     ></span>
                   </div>
+
                   <p>₹{snack.price}</p>
                 </div>
               </div>
@@ -127,6 +131,7 @@ function Home({ cart, setCart }) {
           />
         )}
       </div>
+
       <Footer />
     </div>
   );

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import api from "../services/Api";
+import { students as studentData } from "../data/Data";
 import Footer from "../components/Footer";
 
 function StudentDetail() {
@@ -9,9 +9,10 @@ function StudentDetail() {
   const [student, setStudent] = useState(null);
 
   const fetchStudent = () => {
-    api.get(`/students/${id}`)
-      .then(res => setStudent(res.data))
-      .catch(err => console.error(err));
+    const foundStudent = studentData.find(
+      (s) => s.id === Number(id)
+    );
+    setStudent(foundStudent);
   };
 
   useEffect(() => {
@@ -79,11 +80,13 @@ function StudentDetail() {
                   </tr>
                 </thead>
                 <tbody>
-                  {student.orders.map(order => (
+                  {student.orders.map((order) => (
                     <tr key={order.id}>
                       <td>{order.snackName}</td>
                       <td>{order.quantity}</td>
-                      <td className="fw-semibold">₹{order.amount}</td>
+                      <td className="fw-semibold">
+                        ₹{order.amount}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -92,9 +95,9 @@ function StudentDetail() {
           )}
         </div>
       </div>
+
       <Footer />
     </>
-
   );
 }
 
