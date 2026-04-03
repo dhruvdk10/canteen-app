@@ -84,22 +84,31 @@ const useStore = create(
       // ORDERS STATE
       orders: [],
 
-      placeOrder: (orderData) =>
-        set((state) => {
-          if (state.cart.length === 0) return state;
+placeOrder: ({ studentId, snack, quantity }) =>
+  set((state) => {
+    const updatedStudents = state.students.map((student) => {
+      if (student.id === studentId) {
+        const newOrder = {
+          id: Date.now(),
+          snackName: snack.name,
+          quantity,
+          amount: snack.price * quantity,
+        };
 
-          return {
-            orders: [
-              ...state.orders,
-              {
-                ...orderData,
-                id: Date.now(),
-                date: new Date().toLocaleString(),
-              },
-            ],
-            cart: [],
-          };
-        }),
+        return {
+          ...student,
+          totalSpent: student.totalSpent + newOrder.amount,
+          orders: [...student.orders, newOrder],
+        };
+      }
+      return student;
+    });
+
+    return {
+      students: updatedStudents,
+      cart: [],
+    };
+  }),
 
     }),
     {

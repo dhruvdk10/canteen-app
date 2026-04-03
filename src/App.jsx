@@ -7,55 +7,31 @@ import Students from "./pages/Students";
 import StudentDetail from "./pages/StudentDetail";
 import Cart from "./pages/Cart";
 import { Routes, Route, useLocation } from "react-router-dom";
-import api from "./services/Api";
 import SplashScreen from "./components/SplashScreen";
+import useStore from "./store/useStore"; 
 
 function App() {
-  const [cart, setCart] = useState([]);
-  const [students, setStudents] = useState([]);
+
+  const { students, placeOrder } = useStore();
+
   const [showSplash, setShowSplash] = useState(false);
   const location = useLocation();
 
- useEffect(() => {
-  if (location.pathname === "/" && !sessionStorage.getItem("splashShown")) {
-    setShowSplash(true);
-    sessionStorage.setItem("splashShown", "true");
-  }
-
-  fetchStudents();
-}, [location]);
-
-  const fetchStudents = async () => {
-    try {
-      const res = await api.get("/students");
-      setStudents(res.data);
-    } catch (err) {
-      console.error("Error fetching students:", err);
+  useEffect(() => {
+    if (location.pathname === "/" && !sessionStorage.getItem("splashShown")) {
+      setShowSplash(true);
+      sessionStorage.setItem("splashShown", "true");
     }
-  };
+  }, [location]);
 
-  const handlePlaceOrder = async (snack, studentId, quantity) => {
+  const handlePlaceOrder = (snack, studentId, quantity) => {
     if (!studentId) return;
-    try {
-      const student = students.find((s) => s.id === Number(studentId));
-      const newOrder = {
-        id: Date.now(),
-        snackName: snack.name,
-        quantity,
-        amount: snack.price * quantity,
-      };
-      const updatedStudent = {
-        ...student,
-        totalSpent: student.totalSpent + newOrder.amount,
-        orders: [...student.orders, newOrder],
-      };
-      await api.put(`/students/${studentId}`, updatedStudent);
-      setStudents((prev) =>
-        prev.map((s) => (s.id === Number(studentId) ? updatedStudent : s))
-      );
-    } catch (err) {
-      console.error("Order failed:", err);
-    }
+
+    placeOrder({
+      studentId: Number(studentId),
+      snack,
+      quantity,
+    });
   };
 
   if (showSplash) {
@@ -67,16 +43,18 @@ function App() {
       <Navbar />
       <SignUp />
       <Login />
+
       <Routes>
-        <Route path="/" element={<Home cart={cart} setCart={setCart} />} />
+        <Route path="/" element={<Home />} />
+
         <Route path="/students" element={<Students />} />
+
         <Route path="/students/:id" element={<StudentDetail />} />
+
         <Route
           path="/cart"
           element={
             <Cart
-              cart={cart}
-              setCart={setCart}
               students={students}
               onPlaceOrder={handlePlaceOrder}
             />
