@@ -25,63 +25,120 @@
       "image": "./samosa.avif",
       "rating": 4.8,
       "name": "Samosa",
-      "price": 20
+      "price": 20,
+      "type": "veg"
     },
     {
       "id": 2,
       "image": "./burger.avif",
       "rating": 4.5,
       "name": "Burger",
-      "price": 50
+      "price": 50,
+      "type": "veg"
     },
     {
       "id": 3,
       "image": "./pizza.avif",
       "rating": 4.7,
       "name": "Pizza",
-      "price": 100
+      "price": 100,
+      "type": "veg"
     },
     {
       "id": 4,
       "image": "./pasta.avif",
       "rating": 4.6,
       "name": "Pasta",
-      "price": 80
+      "price": 80,
+      "type": "veg"
     },
     {
       "id": 5,
       "image": "./sandwich.avif",
       "rating": 4.4,
       "name": "Sandwich",
-      "price": 40
+      "price": 40,
+      "type": "veg"
     },
     {
       "id": 6,
       "image": "./fries.avif",
       "rating": 4.3,
       "name": "Fries",
-      "price": 30
+      "price": 30,
+      "type": "veg"
     },
     {
       "id": 7,
       "image": "./noodles.avif",
       "rating": 4.2,
       "name": "Noodles",
-      "price": 60
+      "price": 60,
+      "type": "veg"
     },
     {
       "id": 8,
       "image": "./momos.avif",
       "rating": 4.1,
       "name": "Momos",
-      "price": 70
+      "price": 70,
+      "type": "non-veg"
     },
     {
       "id": 9,
-      "image": "./thali.avif",
+      "image": "./garlic-bread.avif",
       "rating": 4.0,
-      "name": "North Indian Thali",
-      "price": 25
+      "name": "Garlic Bread",
+      "price": 25,
+      "type": "veg"
+    },
+    {
+      "id": 10,
+      "image": "./biryani.avif",
+      "rating": 4.9,
+      "name": "Biryani",
+      "price": 90,
+      "type": "non-veg"
+    },
+    {
+      "id": 11,
+      "image": "./paneer-tikka.avif",
+      "rating": 4.7,
+      "name": "Paneer Tikka",
+      "price": 75,
+      "type": "veg"
+    },
+    {
+      "id": 12,
+      "image": "./south-indian-thali.avif",
+      "rating": 4.6,
+      "name": "South Indian Thali",
+      "price": 45,
+      "type": "veg"
+    },
+    {
+      "id": 13,
+      "image": "./egg-roll.avif",
+      "rating": 4.4,
+      "name": "Egg Roll",
+      "price": 55,
+      "type": "non-veg"
+    },
+    {
+      "id": 14,
+      "image": "./pav-bhaji.avif",
+      "rating": 4.6,
+      "name": "Pav Bhaji",
+      "price": 40,
+      "type": "veg"
+    },
+    {
+      "id": 15,
+      "image": "./bread-omlette.avif",
+      "rating": 4.2,
+      "name": "Bread Omelette",
+      "price": 25,
+      "type": "non-veg"
     }
   ],
   "students": [

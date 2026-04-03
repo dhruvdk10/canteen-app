@@ -73,55 +73,58 @@ function Cart({ cart, setCart, students, onPlaceOrder }) {
             {cart.map((item) => (
               <div key={item.snack.id} className="card mb-3 shadow-sm">
                 <div className="card-body">
-                  <div className="row align-items-center">
+                  <div className="d-flex align-items-center justify-content-between">
 
                     {/* Image */}
-                    <div className="col-4 col-md-2 text-center mb-2 mb-md-0">
+                    <div style={{ width: "40px", height: "60px", flexShrink: 0 }}>
                       <img
                         src={item.snack.image}
-                        alt={item.snack.name}
-                        className="img-fluid rounded"
-                        style={{ maxHeight: "70px", objectFit: "cover" }}
+                        className="img rounded"
+                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
                       />
                     </div>
 
-                    {/* Info */}
-                    <div className="col-8 col-md-4">
-                      <h6 className="mb-1">{item.snack.name}</h6>
-                      <small className="text-muted">
-                        ₹{item.snack.price} each
-                      </small>
+                    {/* Name + Veg/Non-Veg */}
+                    <div className="d-flex align-items-center gap-2 flex-grow-1 ms-3">
+                      <h6 className="mb-0">{item.snack.name}</h6>
+                      <div className="snack-type-square d-flex align-items-center justify-content-center">
+                        <span
+                          className={`snack-type-dot ${
+                            item.snack.type === "veg" ? "veg-dot" : "non-veg-dot"
+                          }`}
+                        ></span>
+                      </div>
+                    </div>
+
+                    {/* Price */}
+                    <div style={{ width: "80px", textAlign: "center" }}>
+                      ₹{item.snack.price * item.quantity}
                     </div>
 
                     {/* Quantity */}
-                    <div className="col-6 col-md-3 mt-2 mt-md-0">
-                      <div className="d-flex justify-content-center align-items-center gap-2">
-                        <button
-                          className="btn-outline-secondary text-danger btn-sm btn"
-                          onClick={() => updateQty(item.snack.id, "dec")}
-                        >
-                          -
-                        </button>
-                        <span className="fw-bold">{item.quantity}</span>
-                        <button
-                          className="btn-outline-secondary text-success btn-sm btn"
-                          onClick={() => updateQty(item.snack.id, "inc")}
-                        >
-                          +
-                        </button>
-                      </div>
+                    <div className="d-flex align-items-center gap-2">
+                      <button
+                        className="btn btn-sm btn-outline-secondary text-danger"
+                        onClick={() => updateQty(item.snack.id, "dec")}
+                      >
+                        -
+                      </button>
+                      <span className="fw-bold">{item.quantity}</span>
+                      <button
+                        className="btn btn-sm btn-outline-secondary text-success"
+                        onClick={() => updateQty(item.snack.id, "inc")}
+                      >
+                        +
+                      </button>
                     </div>
 
-                    {/* Price + Remove */}
-                    <div className="col-6 col-md-3 text-end mt-2 mt-md-0">
-                      <div className="fw-semibold mb-1">
-                        ₹{item.snack.price * item.quantity}
-                      </div>
+                    {/* Trash Icon */}
+                    <div className="ms-3">
                       <button
                         className="btn btn-sm btn-danger"
                         onClick={() => removeItem(item.snack.id)}
                       >
-                        Remove
+                        <i className="bi bi-trash"></i>
                       </button>
                     </div>
 
@@ -131,11 +134,11 @@ function Cart({ cart, setCart, students, onPlaceOrder }) {
             ))}
           </div>
 
+          {/* Sidebar */}
           <div className="col-lg-4">
             <div className="card p-3 shadow-sm sticky-top" style={{ top: "80px" }}>
               <h4 className="mb-3">Total: ₹{getTotal()}</h4>
 
-              {/* Student */}
               <select
                 className="form-control mb-3"
                 value={selectedStudent}
@@ -149,7 +152,6 @@ function Cart({ cart, setCart, students, onPlaceOrder }) {
                 ))}
               </select>
 
-              {/* Location */}
               <input
                 type="text"
                 className="form-control mb-3"
@@ -158,7 +160,6 @@ function Cart({ cart, setCart, students, onPlaceOrder }) {
                 onChange={(e) => setLocation(e.target.value)}
               />
 
-              {/* Payment */}
               <select
                 className="form-control mb-3"
                 value={paymentMethod}

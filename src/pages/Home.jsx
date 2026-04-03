@@ -6,7 +6,7 @@ import OrderModal from "../components/OrderModal";
 import HeroSection from "../components/HeroSection";
 import Footer from "../components/Footer";
 
-function Home({ cart, setCart }) {   // ✅ RECEIVE PROPS
+function Home({ cart, setCart }) {
   const [students, setStudents] = useState([]);
   const [snacks, setSnacks] = useState([]);
   const [selectedSnack, setSelectedSnack] = useState(null);
@@ -25,7 +25,6 @@ function Home({ cart, setCart }) {   // ✅ RECEIVE PROPS
   const openModal = (snack) => setSelectedSnack(snack);
   const closeModal = () => setSelectedSnack(null);
 
-  // Place order via API
   const handlePlaceOrder = async (snack, studentId, quantity) => {
     if (!studentId) {
       alert("Please select a student");
@@ -72,13 +71,12 @@ function Home({ cart, setCart }) {   // ✅ RECEIVE PROPS
       </div>
 
       <div className="container mt-4">
-        <h2 className="mb-4 text-center">Available Snacks</h2>
 
         <div className="row">
           {snacks.map((snack) => (
             <div className="col-md-4" key={snack.id}>
               <div className="card mb-4 h-100 snack-card">
-                <div className="image-wrapper">
+                <div className="image-wrapper position-relative">
                   <img
                     src={snack.image}
                     className="card-img-top"
@@ -89,20 +87,28 @@ function Home({ cart, setCart }) {   // ✅ RECEIVE PROPS
 
                   <div className="hover-btn">
                     <button
-                      className="btn btn-dark"
+                      className="btn btn-dark me-1"
                       onClick={() => openModal(snack)}
-                    > <FontAwesomeIcon icon={faUtensils}/>
+                    >
+                      <FontAwesomeIcon icon={faUtensils} />
                     </button>
-                     <button
+                    <button
                       className="btn btn-dark"
                       onClick={() => openModal(snack)}
-                    > <FontAwesomeIcon icon={faList} className="me-1" />
+                    >
+                      <FontAwesomeIcon icon={faList} className="me-1" />
                     </button>
                   </div>
                 </div>
 
                 <div className="card-body">
                   <h5>{snack.name}</h5>
+                  <div className="snack-type-square position-absolute" style={{ top: '10px', left: '10px', zIndex: 2 }}>
+                    <span
+                      className={`snack-type-dot ${snack.type === "veg" ? "veg-dot" : "non-veg-dot"
+                        }`}
+                    ></span>
+                  </div>
                   <p>₹{snack.price}</p>
                 </div>
               </div>
