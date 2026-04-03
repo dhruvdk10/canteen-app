@@ -11,7 +11,7 @@ function Footer() {
 
           {/* Logo & Badge */}
           <div className="d-flex align-items-center mb-3 mb-md-0">
-            <img src="/canteen-app/edzy-logo.svg" alt="Edzy Logo" style={{ height: "40px" }} />
+            <img src="/edzy-logo.svg" alt="Edzy Logo" style={{ height: "40px" }} />
             <span className="food-badge d-flex align-items-center justify-content-center ms-2">
               <FontAwesomeIcon icon={faUtensils} />
             </span>
