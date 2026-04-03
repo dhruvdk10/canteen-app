@@ -16,7 +16,7 @@ const SplashScreen = ({ onFinish }) => {
     <div className="splash">
       <NavLink to="/" className="splash-logo-link">
         <img
-          src="/canteen-app/edzy-logo.svg"
+          src="/edzy-logo.svg"
           alt="Edzy Logo"
           className="splash-logo-img"
         />

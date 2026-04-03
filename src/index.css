@@ -1,11 +1,38 @@
+* {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   background-color: #f8f9fa;
   background-size: cover;
   background-position: center;
   height: 100%;
   min-height: 100%;
-  margin: 0;
-  padding: 0;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn.show:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.form-control:focus,
+.form-check-input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: inherit !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: inherit !important;
 }
 
 #root {
@@ -397,28 +424,27 @@ h2::after {
 }
 
 /* Button */
-button.btn-secondary {
-  border-radius: 10px;
-  padding: 10px;
-  font-size: 1rem;
-  background: linear-gradient(135deg, #6c757d, #495057);
-  border: none;
-  transition: all 0.3s ease;
+.quantity-btn {
+  width: 25px;
+  height: 25px;
+  border: 1px solid #888;
+  background-color: #fff;
+  color: #333;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
 }
 
-.btn-outline-secondary.text-danger {
-  padding: 0px 6px;
-}
-
-.btn-outline-secondary.text-danger:hover {
+.quantity-btn.minus-btn:hover {
   background-color: rgb(239, 155, 155);
 }
 
-.btn-outline-secondary.text-success {
-  padding: 0px 5px;
-}
-
-.btn-outline-secondary.text-success:hover {
+.quantity-btn.plus-btn:hover {
   background-color: rgb(139, 199, 139);
 }
 

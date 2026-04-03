@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useStore from "../store/useStore";
 
@@ -18,11 +18,14 @@ function Cart() {
   const [paymentMethod, setPaymentMethod] = useState("COD");
   const [location, setLocation] = useState("");
 
+  useEffect(() => {
+    if (students.length > 0 && !selectedStudent) {
+      setSelectedStudent(students[0].id);
+    }
+  }, [students, selectedStudent]);
+
   const getTotal = () => {
-    return cart.reduce(
-      (total, item) => total + item.snack.price * item.quantity,
-      0
-    );
+    return cart.reduce((total, item) => total + item.snack.price * item.quantity, 0);
   };
 
   const handlePlaceOrderClick = () => {
@@ -31,9 +34,7 @@ function Cart() {
       return;
     }
 
-    const studentObj = students.find(
-      (s) => s.id === Number(selectedStudent)
-    );
+    const studentObj = students.find((s) => s.id === Number(selectedStudent));
 
     if (!studentObj) {
       alert("Invalid student selected");
@@ -49,14 +50,10 @@ function Cart() {
       date: new Date().toLocaleString(),
     };
 
-    const existingOrders =
-      JSON.parse(localStorage.getItem("orders")) || [];
+    const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
+    localStorage.setItem("orders", JSON.stringify([...existingOrders, orderData]));
 
-    localStorage.setItem(
-      "orders",
-      JSON.stringify([...existingOrders, orderData])
-    );
-
+    // Update student's orders in Zustand
     cart.forEach((item) => {
       placeOrder({
         studentId: Number(selectedStudent),
@@ -70,72 +67,48 @@ function Cart() {
     navigate("/");
   };
 
-  const updateQty = (id, type) => {
-    updateQuantity(id, type);
-  };
-
-  const removeItem = (id) => {
-    removeFromCart(id);
-  };
+  const updateQty = (id, type) => updateQuantity(id, type);
+  const removeItem = (id) => removeFromCart(id);
 
   return (
     <div className="container py-4">
-      <h2 className="mb-4 text-center text-md-start">
-        Your Cart
-      </h2>
+      <h2 className="mb-4 text-center text-md-start">Your Cart</h2>
 
       {cart.length === 0 ? (
-        <p className="text-muted text-center">
-          Your cart is empty
-        </p>
+        <p className="text-muted text-center">Your cart is empty</p>
       ) : (
         <div className="row">
           <div className="col-lg-8">
             {cart.map((item) => (
-              <div
-                key={item.snack.id}
-                className="card mb-3 shadow-sm"
-              >
+              <div key={item.snack.id} className="card mb-3 shadow-sm">
                 <div className="card-body">
                   <div className="d-flex align-items-center justify-content-between">
                     {/* Image */}
-                    <div
-                      style={{
-                        width: "60px",
-                        height: "60px",
-                      }}
-                    >
+                    <div style={{ width: "60px", height: "60px" }}>
                       <img
                         src={item.snack.image}
                         className="img rounded"
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                        }}
+                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
                         alt={item.snack.name}
                       />
                     </div>
 
                     {/* Name */}
                     <div className="flex-grow-1 ms-3">
-                      <h6 className="mb-0">
-                        {item.snack.name}
-                      </h6>
+                      <h6 className="mb-0">{item.snack.name}</h6>
                     </div>
 
+                    {/* Veg/Non-Veg Dot */}
                     <div
-                    className="snack-type-square position-absolute"
-                    style={{ top: "10px", left: "10px", zIndex: 2 }}
-                  >
-                    <span
-                      className={`snack-type-dot ${
-                        item.snack.type === "veg"
-                          ? "veg-dot"
-                          : "non-veg-dot"
-                      }`}
-                    ></span>
-                  </div>
+                      className="snack-type-square position-absolute"
+                      style={{ top: "10px", left: "10px", zIndex: 2 }}
+                    >
+                      <span
+                        className={`snack-type-dot ${
+                          item.snack.type === "veg" ? "veg-dot" : "non-veg-dot"
+                        }`}
+                      ></span>
+                    </div>
 
                     {/* Price */}
                     <div style={{ width: "40px" }} className="ms-2">
@@ -143,23 +116,17 @@ function Cart() {
                     </div>
 
                     {/* Quantity */}
-                    <div className="d-flex gap-2">
+                    <div className="d-flex gap-1 ms-2 align-items-center">
                       <button
-                        className="btn btn-sm btn-outline-danger btn-sm"
-                        onClick={() =>
-                          updateQty(item.snack.id, "dec")
-                        }
+                        className="quantity-btn minus-btn"
+                        onClick={() => updateQty(item.snack.id, "dec")}
                       >
                         -
                       </button>
-
                       <span>{item.quantity}</span>
-
                       <button
-                        className="btn btn-sm btn-outline-success btn-sm"
-                        onClick={() =>
-                          updateQty(item.snack.id, "inc")
-                        }
+                        className="quantity-btn plus-btn"
+                        onClick={() => updateQty(item.snack.id, "inc")}
                       >
                         +
                       </button>
@@ -168,9 +135,7 @@ function Cart() {
                     {/* Remove */}
                     <button
                       className="btn btn-sm btn-danger ms-3"
-                      onClick={() =>
-                        removeItem(item.snack.id)
-                      }
+                      onClick={() => removeItem(item.snack.id)}
                     >
                       🗑
                     </button>
@@ -186,14 +151,13 @@ function Cart() {
               <h4>Total: ₹{getTotal()}</h4>
 
               <select
+                key={students.length}
                 className="form-control mb-3"
                 value={selectedStudent}
-                onChange={(e) =>
-                  setSelectedStudent(e.target.value)
-                }
+                onChange={(e) => setSelectedStudent(e.target.value)}
               >
-                <option value="">Select Student</option>
-                {students?.map((s) => (
+                {students.length === 0 && <option value="">Select Student</option>}
+                {students.map((s) => (
                   <option key={s.id} value={s.id}>
                     {s.name}
                   </option>
@@ -205,27 +169,20 @@ function Cart() {
                 className="form-control mb-3"
                 placeholder="Delivery location"
                 value={location}
-                onChange={(e) =>
-                  setLocation(e.target.value)
-                }
+                onChange={(e) => setLocation(e.target.value)}
               />
 
               <select
                 className="form-control mb-3"
                 value={paymentMethod}
-                onChange={(e) =>
-                  setPaymentMethod(e.target.value)
-                }
+                onChange={(e) => setPaymentMethod(e.target.value)}
               >
                 <option value="COD">COD</option>
                 <option value="UPI">UPI</option>
                 <option value="Card">Card</option>
               </select>
 
-              <button
-                className="btn btn-success w-100"
-                onClick={handlePlaceOrderClick}
-              >
+              <button className="btn btn-success w-100" onClick={handlePlaceOrderClick}>
                 Place Order
               </button>
             </div>

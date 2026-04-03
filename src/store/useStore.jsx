@@ -59,12 +59,8 @@ const useStore = create(
         set((state) => ({
           cart: state.cart.map((item) => {
             if (item.snack.id === id) {
-              if (type === "inc") {
-                return { ...item, quantity: item.quantity + 1 };
-              }
-              if (type === "dec" && item.quantity > 1) {
-                return { ...item, quantity: item.quantity - 1 };
-              }
+              if (type === "inc") return { ...item, quantity: item.quantity + 1 };
+              if (type === "dec" && item.quantity > 1) return { ...item, quantity: item.quantity - 1 };
             }
             return item;
           }),
