@@ -19,7 +19,7 @@ function Footer() {
 
           {/* App Download */}
           <div className="d-flex gap-2 mb-3 mb-md-0">
-            <a href="https://play.google.com/store" target="_blank" rel="noreferrer">
+            <a href="https://play.google.com/store/apps/details?id=com.edzy.ai" target="_blank" rel="noreferrer">
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
                 alt="Play Store"
