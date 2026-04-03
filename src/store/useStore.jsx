@@ -24,7 +24,7 @@ const useStore = create(
           cart: [],
         })),
 
-      // 🛒 CART STATE
+      // CART STATE
       cart: [],
 
       addToCart: (newItem) =>
@@ -81,7 +81,7 @@ const useStore = create(
 
       clearCart: () => set({ cart: [] }),
 
-      // 📦 ORDERS STATE
+      // ORDERS STATE
       orders: [],
 
       placeOrder: (orderData) =>
