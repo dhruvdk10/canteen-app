@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUtensils, faList } from "@fortawesome/free-solid-svg-icons";
-import { banners as bannerData } from "../data/Data";
+import api from "../services/Api";
 
 function HeroSection() {
   const [banners, setBanners] = useState([]);
 
-  // ✅ Load local data instead of API
   useEffect(() => {
-    setBanners(bannerData);
+    const fetchBanners = async () => {
+      try {
+        const res = await api.get("/banners");
+        setBanners(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchBanners();
   }, []);
 
   return (
@@ -22,9 +30,8 @@ function HeroSection() {
           {banners.map((banner, index) => (
             <div
               key={banner.id}
-              className={`carousel-item ${
-                index === 0 ? "active" : ""
-              }`}
+              className={`carousel-item ${index === 0 ? "active" : ""
+                }`}
             >
               <div className="banner-wrapper position-relative">
                 <img

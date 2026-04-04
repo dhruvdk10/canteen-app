@@ -26,6 +26,10 @@ function OrderModal({ show, onClose, snack, students }) {
     else bsModalRef.current?.hide();
   }, [show, onClose]);
 
+  const selectedStudent = students.find(
+    (s) => s._id === studentId
+  );
+
   const handleAddToCart = () => {
     if (!studentId) {
       alert("Please select a student before adding to cart!");
@@ -33,16 +37,17 @@ function OrderModal({ show, onClose, snack, students }) {
     }
     if (!snack) return;
 
-    const studentName = students.find(s => s.id === Number(studentId))?.name;
-
     addToCart({
       snack,
       quantity,
-      studentId: Number(studentId),
-      studentName, // ✅ add student name here
+      studentId, // ✅ string _id
+      studentName: selectedStudent?.name, // ✅ from store
     });
 
-    alert(`${quantity} ${snack.name}(s) added for ${studentName}! ✅`);
+    alert(
+      `${quantity} ${snack.name}(s) added for ${selectedStudent?.name}! ✅`
+    );
+
     bsModalRef.current?.hide();
   };
 
@@ -53,40 +58,47 @@ function OrderModal({ show, onClose, snack, students }) {
     }
 
     placeOrder({
-      studentId: Number(studentId),
+      studentId, // ✅ string _id
       snack,
       quantity,
     });
 
-    alert("Order placed successfully 🚀");
+    alert(`Order placed for ${selectedStudent?.name} 🚀`);
+
     bsModalRef.current?.hide();
   };
 
   return (
     <div className="modal fade" ref={modalRef}>
-      <div className="modal-dialog modal-dialog-centered"
-      style={{ maxWidth: "400px", width: "90%", margin: "auto" }}>
+      <div
+        className="modal-dialog modal-dialog-centered"
+        style={{ maxWidth: "400px", width: "90%", margin: "auto" }}
+      >
         <div className="modal-content">
 
-          <div className="text-center mb-2">
+          {/* IMAGE */}
+          <div className="text-center mb-2 position-relative">
             <img src={snack.image} alt={snack.name} className="card-img-top" />
+
             <div
               className="snack-type-square position-absolute"
               style={{ top: "20px", left: "20px", zIndex: 2 }}
             >
               <span
-                className={`snack-type-dot ${snack.type === "veg" ? "veg-dot" : "non-veg-dot"
-                  }`}
+                className={`snack-type-dot ${
+                  snack.type === "veg" ? "veg-dot" : "non-veg-dot"
+                }`}
               ></span>
             </div>
           </div>
 
-          <div className="modal-heading mx-3" style={{fontSize:"18px"}}>
+          {/* INFO */}
+          <div className="modal-heading mx-3" style={{ fontSize: "18px" }}>
             <p>{snack.name}</p>
-
             <p style={{ fontWeight: "bold" }}>₹{snack.price}</p>
           </div>
 
+          {/* SELECT + QUANTITY */}
           <div className="d-flex gap-4 mx-3 mb-3">
             <select
               className="form-select"
@@ -95,7 +107,7 @@ function OrderModal({ show, onClose, snack, students }) {
             >
               <option value="">Select Student</option>
               {students.map((s) => (
-                <option key={s.id} value={s.id}>
+                <option key={s._id} value={s._id}>
                   {s.name}
                 </option>
               ))}
@@ -118,6 +130,7 @@ function OrderModal({ show, onClose, snack, students }) {
             </div>
           </div>
 
+          {/* BUTTONS */}
           <div className="d-flex gap-3 mx-3 mb-3">
             <button className="btn btn-warning w-50" onClick={handleAddToCart}>
               Add to Cart

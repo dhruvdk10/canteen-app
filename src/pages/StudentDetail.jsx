@@ -1,24 +1,33 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { students as studentData } from "../data/Data";
 import Footer from "../components/Footer";
+import api from "../services/Api";
 
 function StudentDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [student, setStudent] = useState(null);
 
-  const fetchStudent = () => {
-    const foundStudent = studentData.find(
-      (s) => s.id === Number(id)
-    );
-    setStudent(foundStudent);
+  const fetchStudent = async () => {
+    try {
+      const res = await api.get("/students");
+
+      console.log("API DATA:", res.data);
+      console.log("PARAM ID:", id);
+
+      const foundStudent = res.data.find(s => s._id === id);
+
+      setStudent(foundStudent);
+    } catch (err) {
+      console.log("Error fetching student:", err);
+    }
   };
 
   useEffect(() => {
     fetchStudent();
   }, [id]);
 
+  // ✅ LOADING STATE
   if (!student)
     return (
       <div className="container text-center mt-5">
@@ -48,7 +57,7 @@ function StudentDetail() {
                 <strong>Referral Code:</strong> {student.referralCode}
               </p>
               <p className="mb-0">
-                <strong>Total Spent:</strong> ₹{student.totalSpent}
+                <strong>Total Spent:</strong> ₹{student.totalSpent || 0}
               </p>
             </div>
 
@@ -67,7 +76,7 @@ function StudentDetail() {
         <div className="card shadow-sm p-3">
           <h4 className="mb-3">Orders</h4>
 
-          {student.orders.length === 0 ? (
+          {!student.orders || student.orders.length === 0 ? (
             <p className="text-muted">No orders yet.</p>
           ) : (
             <div className="table-responsive">

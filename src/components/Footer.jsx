@@ -10,7 +10,7 @@ function Footer() {
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
 
           {/* Logo & Badge */}
-          <div className="d-flex align-items-center mb-3 mb-md-0">
+          <div className="d-flex align-items-center mb-3 me-5 mb-md-0">
             <img src="/edzy-logo.svg" alt="Edzy Logo" style={{ height: "40px" }} />
             <div className="ms-2 d-flex align-items-center">
               <span className="food-badge d-flex align-items-center justify-content-center me-1">
@@ -20,7 +20,7 @@ function Footer() {
           </div>
 
           {/* App Download */}
-          <div className="d-flex gap-2 mb-3 mb-md-0">
+          <div className="d-flex gap-2 mb-3" style={{margin: "auto"}}>
             <a href="https://play.google.com/store/apps/details?id=com.edzy.ai" target="_blank" rel="noreferrer">
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"

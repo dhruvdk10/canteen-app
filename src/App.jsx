@@ -8,7 +8,9 @@ import StudentDetail from "./pages/StudentDetail";
 import Cart from "./pages/Cart";
 import { Routes, Route, useLocation } from "react-router-dom";
 import SplashScreen from "./components/SplashScreen";
-import useStore from "./store/useStore"; 
+import useStore from "./store/useStore";
+// import { AuthProvider } from "./context/AuthContext";
+// import { OrderProvider } from "./context/OrderContext";
 
 function App() {
 
@@ -40,6 +42,8 @@ function App() {
 
   return (
     <>
+    {/* <AuthProvider>
+      <OrderProvider> */}
       <Navbar />
       <SignUp />
       <Login />
@@ -61,6 +65,8 @@ function App() {
           }
         />
       </Routes>
+      {/* </OrderProvider>
+      </AuthProvider> */}
     </>
   );
 }
