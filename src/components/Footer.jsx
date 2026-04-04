@@ -25,14 +25,14 @@ function Footer() {
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
                 alt="Play Store"
-                style={{ height: "50px" }}
+                style={{ height: "40px" }}
               />
             </a>
             <a href="https://www.apple.com/app-store/" target="_blank" rel="noreferrer">
               <img
                 src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
                 alt="App Store"
-                style={{ height: "50px" }}
+                style={{ height: "40px" }}
               />
             </a>
           </div>

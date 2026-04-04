@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useStore from "../store/useStore";
+import Footer from "../components/Footer";
 
 function Cart() {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ function Cart() {
         snack: item.snack,
         quantity: item.quantity,
         studentId: item.studentId,
-        studentName: item.studentName || "Unknown", // 
+        studentName: item.studentName || "Unknown", //
       })),
       paymentMethod,
       location,
@@ -70,7 +71,8 @@ function Cart() {
   const removeItem = (id) => removeFromCart(id);
 
   return (
-    <div className="container py-4">
+    <>
+    <div className="main-content container py-4">
       <h2 className="mb-4 text-center text-md-start">Your Cart</h2>
 
       {cart.length === 0 ? (
@@ -181,6 +183,8 @@ function Cart() {
         </div>
       )}
     </div>
+    <Footer />
+    </>
   );
 }
 
