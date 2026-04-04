@@ -97,23 +97,22 @@ function Home({ cart, setCart }) {
                   </div>
                 </div>
 
-                <div className="card-body">
-                  <h5>{snack.name}</h5>
+                <div className="card-body" style={{ fontSize: "18px" }}>
+                  <p>{snack.name}</p>
 
                   <div
                     className="snack-type-square position-absolute"
                     style={{ top: "10px", left: "10px", zIndex: 2 }}
                   >
                     <span
-                      className={`snack-type-dot ${
-                        snack.type === "veg"
+                      className={`snack-type-dot ${snack.type === "veg"
                           ? "veg-dot"
                           : "non-veg-dot"
-                      }`}
+                        }`}
                     ></span>
                   </div>
 
-                  <p>₹{snack.price}</p>
+                  <p style={{ fontWeight: "bold" }}>₹{snack.price}</p>
                 </div>
               </div>
             </div>

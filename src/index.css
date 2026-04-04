@@ -243,15 +243,17 @@ h2::after {
   justify-content: space-between;
 }
 
-.card-body p {
-  font-weight: bold;
-}
-
 .card-img-top {
   height: 300px;
   object-fit: cover;
   border-radius: 10px;
   margin: 0 !important;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 /* Wrapper */
@@ -410,7 +412,7 @@ h2::after {
   border: 1px solid #888;
   background-color: #fff;
   color: #333;
-  font-size: 12px;
+  font-size: 15px;
   font-weight: bold;
   border-radius: 4px;
   cursor: pointer;
@@ -420,12 +422,22 @@ h2::after {
   transition: all 0.2s ease;
 }
 
+.quantity-btn.minus-btn{
+  color: rgb(167, 4, 4);
+}
+
 .quantity-btn.minus-btn:hover {
   background-color: rgb(239, 155, 155);
+  color: #000000;
+}
+
+.quantity-btn.plus-btn {
+  color: green;
 }
 
 .quantity-btn.plus-btn:hover {
   background-color: rgb(139, 199, 139);
+  color: #000000;
 }
 
 .form-select {
@@ -462,25 +474,6 @@ h2::after {
 .student-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-}
-
-/* Student Name */
-.student-card h5 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: #333;
-}
-
-/* Info Paragraphs */
-.student-card p {
-  font-size: 0.95rem;
-  margin-bottom: 0.5rem;
-  color: #555;
-}
-
-.student-card p strong {
-  color: #333;
 }
 
 /* Button */

@@ -67,23 +67,26 @@ function OrderModal({ show, onClose, snack, students }) {
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
 
-          <div className="text-center mb-3">
+          <div className="text-center mb-2">
             <img src={snack.image} alt={snack.name} className="card-img-top" />
             <div
               className="snack-type-square position-absolute"
               style={{ top: "20px", left: "20px", zIndex: 2 }}
             >
               <span
-                className={`snack-type-dot ${
-                  snack.type === "veg" ? "veg-dot" : "non-veg-dot"
-                }`}
+                className={`snack-type-dot ${snack.type === "veg" ? "veg-dot" : "non-veg-dot"
+                  }`}
               ></span>
             </div>
           </div>
 
-          <h5 className="mx-3">{snack.name}</h5>
+          <div className="modal-body" style={{fontSize:"18px"}}>
+            <p>{snack.name}</p>
 
-          <div className="d-flex gap-3 mx-3 my-3">
+            <p style={{ fontWeight: "bold" }}>₹{snack.price}</p>
+          </div>
+
+          <div className="d-flex gap-5 mx-3 mb-3">
             <select
               className="form-select"
               value={studentId}
@@ -114,7 +117,7 @@ function OrderModal({ show, onClose, snack, students }) {
             </div>
           </div>
 
-          <div className="d-flex gap-2 mx-3 mb-3">
+          <div className="d-flex gap-3 mx-3 mb-3">
             <button className="btn btn-warning w-50" onClick={handleAddToCart}>
               Add to Cart
             </button>
