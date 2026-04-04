@@ -64,7 +64,8 @@ function OrderModal({ show, onClose, snack, students }) {
 
   return (
     <div className="modal fade" ref={modalRef}>
-      <div className="modal-dialog modal-dialog-centered">
+      <div className="modal-dialog modal-dialog-centered"
+      style={{ maxWidth: "400px", width: "90%", margin: "auto" }}>
         <div className="modal-content">
 
           <div className="text-center mb-2">
@@ -80,13 +81,13 @@ function OrderModal({ show, onClose, snack, students }) {
             </div>
           </div>
 
-          <div className="modal-body" style={{fontSize:"18px"}}>
+          <div className="modal-heading mx-3" style={{fontSize:"18px"}}>
             <p>{snack.name}</p>
 
             <p style={{ fontWeight: "bold" }}>₹{snack.price}</p>
           </div>
 
-          <div className="d-flex gap-5 mx-3 mb-3">
+          <div className="d-flex gap-4 mx-3 mb-3">
             <select
               className="form-select"
               value={studentId}

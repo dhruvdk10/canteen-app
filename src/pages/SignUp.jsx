@@ -80,7 +80,7 @@ const SignUp = () => {
         <div className="modal fade" id="signupModal">
           <div
             className="modal-dialog modal-dialog-centered border-0"
-            style={{ maxWidth: "460px", width: "90%", margin: "auto" }}
+            style={{ maxWidth: "400px", width: "90%", margin: "auto" }}
           >
             <div className="modal-content">
 

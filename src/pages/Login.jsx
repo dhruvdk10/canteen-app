@@ -37,7 +37,7 @@ const Login = () => {
   return (
     <section className="form-box">
       <div className="modal fade" id="loginModal">
-        <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: "460px", width: "90%", margin: "auto" }}>
+        <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: "400px", width: "90%", margin: "auto" }}>
           <div className="modal-content">
 
             {/* Header */}

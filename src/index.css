@@ -243,17 +243,17 @@ h2::after {
   justify-content: space-between;
 }
 
+.modal-heading{
+    display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .card-img-top {
   height: 300px;
   object-fit: cover;
   border-radius: 10px;
   margin: 0 !important;
-}
-
-.modal-body {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 }
 
 /* Wrapper */
