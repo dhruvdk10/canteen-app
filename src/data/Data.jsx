@@ -533,4 +533,27 @@ export const students = [
       },
     ],
   },
+  {
+    id: 22,
+    name: "Sakshi Chauhan",
+    email: "sakshi@gmail.com",
+    phone: "1199001122",
+    referralCode: "SA022",
+    totalSpent: 110,
+    orders: [
+      {
+        id: 29,
+        snackName: "Pizza",
+        quantity: 1,
+        amount: 100,
+      },
+      {
+        id: 30,
+        snackName: "Samosa",
+        quantity: 1,
+        amount: 20,
+      },
+    ],
+
+  }
 ];
