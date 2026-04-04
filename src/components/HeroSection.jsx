@@ -49,7 +49,7 @@ function HeroSection() {
                         icon={faUtensils}
                         className="me-1"
                       />
-                      Order Now
+                      Order
                     </button>
                   </div>
 
