@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import api from "../services/Api";
 
 const useStore = create(
   persist(
@@ -74,6 +75,23 @@ const useStore = create(
         })),
 
       clearCart: () => set({ cart: [] }),
+
+      // 🔥 ADD THIS FUNCTION (MAIN FIX)
+      placeOrder: async ({ snack, quantity, studentId }) => {
+        try {
+          const response = await api.post("/orders", {
+            studentId,
+            snackId: snack._id,
+            quantity,
+            amount: snack.price * quantity,
+          });
+
+          console.log("✅ Order saved:", response.data);
+        } catch (error) {
+          console.error("❌ Order error:", error);
+          throw error;
+        }
+      },
     }),
     { name: "snack-store" }
   )

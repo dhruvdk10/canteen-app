@@ -25,7 +25,8 @@ function Cart() {
     );
   };
 
-  const handlePlaceOrderClick = () => {
+  // 🔥 UPDATED FUNCTION (API CONNECTED)
+  const handlePlaceOrderClick = async () => {
     if (!location) {
       alert("Please enter delivery location");
       return;
@@ -37,34 +38,23 @@ function Cart() {
       return;
     }
 
-    // Optional local storage
-    const orderData = {
-      items: cart,
-      paymentMethod,
-      location,
-      total: getTotal(),
-      date: new Date().toLocaleString(),
-    };
+    try {
+      // Send each item to backend
+      for (const item of cart) {
+        await placeOrder({
+          snack: item.snack,
+          quantity: item.quantity,
+          studentId: item.studentId,
+        });
+      }
 
-    const existingOrders =
-      JSON.parse(localStorage.getItem("orders")) || [];
-    localStorage.setItem(
-      "orders",
-      JSON.stringify([...existingOrders, orderData])
-    );
-
-    // Zustand order logic
-    cart.forEach((item) => {
-      placeOrder({
-        snack: item.snack,
-        quantity: item.quantity,
-        studentId: item.studentId,
-      });
-    });
-
-    clearCart();
-    alert(`Order placed via ${paymentMethod} 🚀`);
-    navigate("/");
+      clearCart();
+      alert(`Order placed via ${paymentMethod} 🚀`);
+      navigate("/");
+    } catch (error) {
+      console.error("Order failed:", error);
+      alert("Order failed ❌");
+    }
   };
 
   const updateQty = (id, type) => updateQuantity(id, type);
